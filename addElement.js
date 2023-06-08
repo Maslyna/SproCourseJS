@@ -1,3 +1,5 @@
+import {drawGraphic, replaceMathFunctions, isEvaluable, isNotEmpty} from './functions.js';
+
 const addButton = document.getElementById('addButton');
 const inputOfElement = document.getElementById('inputOfElement');
 const output = document.getElementById("output");
@@ -20,39 +22,3 @@ addButton.addEventListener('click', () => {
       output.innerHTML = "Введена функція невірна!";
     }
 })
-
-function replaceMathFunctions(str) {
-  const functionMap = {
-    'pow': 'Math.pow',
-    'abs': 'Math.abs',
-    'sqrt': 'Math.sqrt',
-    'tan': 'Math.tan',
-    'sin': 'Math.sin',
-    'cos': 'Math.cos',
-    'Math.pow' : 'Math.pow',
-    'Math.abs' : 'Math.abs',
-    'Math.sqrt' : 'Math.sqrt',
-    'Math.tan' : 'Math.tan',
-    'Math.sin' : 'Math.sin',
-    'Math.cos' : 'Math.cos'
-  };
-  const regex = new RegExp(Object.keys(functionMap).join('|'), 'g');
-  return str.replace(regex, match => functionMap[match]);
-}
-
-function isEvaluable(str) {
-  const x = 1;
-  console.log(str)
-  try {
-    if (eval(str) !== NaN) {
-      return true;
-    }
-    return false;
-  } catch (e) {
-    return false;
-  }
-}
-
-function isNotEmpty(str) {
-  return str.length !== 0;
-}
