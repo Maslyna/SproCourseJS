@@ -1,7 +1,15 @@
-export default function drawGraphic(value) {
+/*
+export function drawGraphic(value) {
     console.log(value);
     const canvas = document.getElementById("myCanvas");
     const ctx = canvas.getContext("2d");
+
+    // clear the old graph
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    ctx.strokeStyle = "orange"; // graphic color line
+    ctx.lineWidth = 2; // width of line
+    ctx.font = "12px Arial"; // font
   
     const xMin = -10; // minimum x value
     const xMax = 10; // maximum x value
@@ -19,7 +27,6 @@ export default function drawGraphic(value) {
     ctx.stroke();
   
     // draw x and y axis labels
-    ctx.font = "12px Arial";
     ctx.fillText("x", canvas.width - 10, originY - 10);
     ctx.fillText("y", originX + 10, 10);
   
@@ -46,7 +53,8 @@ export default function drawGraphic(value) {
         ctx.fillText(y.toString(), originX + 10, yCoord + 3);
       }
     }
-  
+
+    ctx.strokeStyle = "#45a049"; // graphic color line
     // draw the graph
     ctx.beginPath();
     let x = -canvas.width * 2;
@@ -54,13 +62,87 @@ export default function drawGraphic(value) {
     for (let x = -canvas.width / 2; x <= canvas.width / 2; x += step) {
       if (isEvaluable(value)) {
         ctx.lineTo(originX + x * scale, originY - eval(value) * scale);
+        console.log(`x = ${x} y = ${eval(value)}`)
       }
-      console.log(`x = ${x} y = ${eval(value)}`)
     }
     ctx.stroke();
+} */
+
+export function drawGraphic(value) {
+  console.log(value);
+  const canvas = document.getElementById("myCanvas");
+  const ctx = canvas.getContext("2d");
+
+  // clear canvas
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // styles for graphic
+  ctx.strokeStyle = "orange"; // graphic color line
+  ctx.lineWidth = 2; // width of line
+  ctx.font = "12px Arial"; // font
+
+  const xMin = -20; // minimum x value
+  const xMax = 20; // maximum x value
+  const step = 0.1; // step size for x
+  const scale = 30; // pixels per unit
+  const originX = canvas.width / 2; // x coordinate of the origin
+  const originY = canvas.height / 2; // y coordinate of the origin
+
+  // draw x and y axes
+  ctx.beginPath();
+  ctx.moveTo(0, originY);
+  ctx.lineTo(canvas.width, originY);
+  ctx.moveTo(originX, 0);
+  ctx.lineTo(originX, canvas.height);
+  ctx.stroke();
+  
+  // draw x and y axis labels
+  ctx.fillText("x", canvas.width - 10, originY - 10);
+  ctx.fillText("y", originX + 10, 10);
+  
+  // draw x tick marks and labels
+  for (let x = -canvas.width / 2; x <= canvas.width / 2; x++) {
+    const xCoord = originX + x * scale;
+    ctx.moveTo(xCoord, originY - 5);
+    ctx.lineTo(xCoord, originY + 5);
+    ctx.stroke();
+    if (x !== 0) {
+      ctx.fillText(x.toString(), xCoord - 3, originY + 15);
+    } else {
+      ctx.fillText(x.toString(), xCoord + 5, originY + 15)
+    }
+  }
+  
+  // draw y tick marks and labels
+  for (let y = -canvas.height / 2; y <= canvas.height / 2; y++) {
+    const yCoord = originY - y * scale;
+    ctx.moveTo(originX - 5, yCoord);
+    ctx.lineTo(originX + 5, yCoord);
+    ctx.stroke();
+    if (y !== 0) {
+      ctx.fillText(y.toString(), originX + 10, yCoord + 3);
+    }
+  }
+
+  let x = xMin;
+  ctx.strokeStyle = "#45a049";
+
+  function drawFrame() {
+    if (x <= xMax) {
+      ctx.moveTo(originX + x * scale, originY - eval(value) * scale);
+      x += step;
+      ctx.lineTo(originX + x * scale, originY - eval(value) * scale);
+      ctx.stroke();
+
+      requestAnimationFrame(drawFrame);
+    }
+  }
+
+  drawFrame();
 }
 
-export default function replaceMathFunctions(str) {
+
+export function replaceMathFunctions(str) {
     const functionMap = {
       'pow': 'Math.pow',
       'abs': 'Math.abs',
@@ -79,7 +161,7 @@ export default function replaceMathFunctions(str) {
     return str.replace(regex, match => functionMap[match]);
   }
   
-export default function isEvaluable(str) {
+export function isEvaluable(str) {
     let x = 1;
     console.log(str)
     try {
@@ -92,7 +174,7 @@ export default function isEvaluable(str) {
     }
 }
   
-export default function isNotEmpty(str) {
+export function isNotEmpty(str) {
     return str.length !== 0;
 }
   

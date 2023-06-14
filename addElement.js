@@ -3,6 +3,8 @@ import {drawGraphic, replaceMathFunctions, isEvaluable, isNotEmpty} from './func
 const addButton = document.getElementById('addButton');
 const inputOfElement = document.getElementById('inputOfElement');
 const output = document.getElementById("output");
+inputOfElement.classList.add('inputOfElementStyle');
+output.classList.add('errorTextStyle');
 addButton.textContent = 'Add';
 
 addButton.addEventListener('click', () => {

@@ -1,5 +1,8 @@
 import {drawGraphic, replaceMathFunctions, isEvaluable, isNotEmpty} from './functions.js';
+
 const elementList = document.getElementById('elementList');
+const graphicDialog = document.getElementById('graphicDialog');
+
 
 fetch('http://localhost:8080/api/functions')
   .then(response => response.json())
@@ -10,6 +13,11 @@ fetch('http://localhost:8080/api/functions')
       const updateButton = document.createElement('button');
       const drawButton = document.createElement('button');
       const deleteButton = document.createElement('button');
+      const errorElement = document.createElement('p')
+      const errorText = document.createTextNode("");
+      
+      errorElement.appendChild(errorText);
+      errorElement.classList.add('errorTextStyle');
       
       input.type = 'text';
       input.value = element.function_text;
@@ -29,7 +37,7 @@ fetch('http://localhost:8080/api/functions')
           .catch(error => console.error(error));
           location.reload();
         } else {
-          output.innerHTML = "Введена функція невірна!";
+          errorText.textContent = "*Введена функція невірна!";
         }
       });
       
@@ -37,6 +45,7 @@ fetch('http://localhost:8080/api/functions')
       drawButton.addEventListener('click', () => {
         const value = element.function_text;
         drawGraphic(replaceMathFunctions(value));
+        graphicDialog.style.display = "block";
       });
 
       deleteButton.textContent = 'Delete';
@@ -62,6 +71,7 @@ fetch('http://localhost:8080/api/functions')
       li.appendChild(updateButton);
       li.appendChild(drawButton);
       li.appendChild(deleteButton);
+      li.appendChild(errorElement);
       elementList.appendChild(li);
     });
   })

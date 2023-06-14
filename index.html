@@ -5,21 +5,53 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script type="module" src="functions.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body >
+<body>
     <h1>Database Elements:</h1>
-    <div><input placeholder="Введіть текст функції" id="inputOfElement"><button id="addButton"></button></div>
-    <div id="output"></div>
-    <br>
+    <div>
+        <input placeholder="Введіть текст функції" id="inputOfElement">
+        <button id="addButton">Додати</button>
+        <p id="output"></p>
+    </div>
+
     <ul id="elementList"></ul>
     <br>
-    <script src="userInterface.js"></script>
-    <script src="addElement.js"></script>
+    
+    <button type="module" id="clearButton">Очистити</button>
     <br>
-    <button id="clearButton"></button>
-    <script src="clearButton.js"></script>
+
+    <div id="graphicDialog" class="dialog" style="display: none;">
+        <canvas id="myCanvas" width="1000" height="1000"></canvas></div>
     <br>
-    <canvas id="myCanvas" width="1000" height="1000"></canvas>
+    <button id="infoButton">Інформація про автора</button>
+    
+    <div id="infoDialog" class="dialog" style="display: block;">
+        <h2>Курсову роботу виконав студент групи КІУКІ-21-5 Ординцев М.О</h2>
+        <p>Це моя перша спроба пера у front-end напрямку, наче не усе так і погано</p>
+        <button id="closeButton">Закрити</button>
+    </div>
+    
+    <script type="module" src="functions.js"></script>
+    <script type="module" src="userInterface.js"></script>
+    <script type="module" src="addElement.js"></script>
+    <script type="module" src="clearButton.js"></script>
+    <script type="module">
+        const infoButton = document.getElementById("infoButton");
+        const infoDialog = document.getElementById("infoDialog");
+        const closeButton = document.getElementById("closeButton");
+        infoDialog.classList.add("hidden");
+        
+        infoButton.addEventListener("click", function() {
+            infoDialog.style.display = "block";
+            infoDialog.classList.remove("hidden");
+            infoDialog.classList.add("visible");
+        });
+        
+        closeButton.addEventListener("click", function() {
+            infoDialog.classList.remove("visible");
+            infoDialog.classList.add("hidden");
+        });
+    </script>
 </body>
 </html>
