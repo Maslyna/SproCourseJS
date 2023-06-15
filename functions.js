@@ -95,11 +95,11 @@ export function drawGraphic(value) {
   ctx.moveTo(originX, 0);
   ctx.lineTo(originX, canvas.height);
   ctx.stroke();
-  
+
   // draw x and y axis labels
   ctx.fillText("x", canvas.width - 10, originY - 10);
   ctx.fillText("y", originX + 10, 10);
-  
+
   // draw x tick marks and labels
   for (let x = -canvas.width / 2; x <= canvas.width / 2; x++) {
     const xCoord = originX + x * scale;
@@ -112,7 +112,7 @@ export function drawGraphic(value) {
       ctx.fillText(x.toString(), xCoord + 5, originY + 15)
     }
   }
-  
+
   // draw y tick marks and labels
   for (let y = -canvas.height / 2; y <= canvas.height / 2; y++) {
     const yCoord = originY - y * scale;
@@ -143,38 +143,59 @@ export function drawGraphic(value) {
 
 
 export function replaceMathFunctions(str) {
-    const functionMap = {
-      'pow': 'Math.pow',
-      'abs': 'Math.abs',
-      'sqrt': 'Math.sqrt',
-      'tan': 'Math.tan',
-      'sin': 'Math.sin',
-      'cos': 'Math.cos',
-      'Math.pow' : 'Math.pow',
-      'Math.abs' : 'Math.abs',
-      'Math.sqrt' : 'Math.sqrt',
-      'Math.tan' : 'Math.tan',
-      'Math.sin' : 'Math.sin',
-      'Math.cos' : 'Math.cos'
-    };
-    const regex = new RegExp(Object.keys(functionMap).join('|'), 'g');
-    return str.replace(regex, match => functionMap[match]);
-  }
-  
+  const functionMap = {
+    'pow': 'Math.pow',
+    'abs': 'Math.abs',
+    'sqrt': 'Math.sqrt',
+    'tan': 'Math.tan',
+    'sin': 'Math.sin',
+    'cos': 'Math.cos',
+    'exp': 'Math.exp',
+    'log': 'Math.log',
+    'log10': 'Math.log10',
+    'cbrt': 'Math.cbrt',
+    'sinh': 'Math.sinh',
+    'cosh': 'Math.cosh',
+    'tanh': 'Math.tanh',
+    'asin': 'Math.asin',
+    'acos': 'Math.acos',
+    'atan': 'Math.atan',
+    'random' : 'Math.random',
+    'Math.pow': 'Math.pow',
+    'Math.abs': 'Math.abs',
+    'Math.sqrt': 'Math.sqrt',
+    'Math.tan': 'Math.tan',
+    'Math.sin': 'Math.sin',
+    'Math.cos': 'Math.cos',
+    'Math.exp' : 'Math.exp',
+    'Math.log' : 'Math.log',
+    'Math.log10' : 'Math.log10',
+    'Math.cbrt' : 'Math.cbrt',
+    'Math.sinh' : 'Math.sinh',
+    'Math.cosh' : 'Math.cosh',
+    'Math.tanh' : 'Math.tanh',
+    'Math.asin' : 'Math.asin',
+    'Math.acos' : 'Math.acos',
+    'Math.atan' : 'Math.atan',
+    'Math.random' : 'Math.random'
+  };
+  const regex = new RegExp(Object.keys(functionMap).join('|'), 'g');
+  return str.replace(regex, match => functionMap[match]);
+}
+
 export function isEvaluable(str) {
-    let x = 1;
-    console.log(str)
-    try {
-      if (eval(str) !== NaN && eval(str) !== Infinity) {
-        return true;
-      }
-      return false;
-    } catch (e) {
-      return false;
+  let x = 1;
+  console.log(str)
+  try {
+    if (eval(str) !== NaN && eval(str) !== Infinity) {
+      return true;
     }
+    return false;
+  } catch (e) {
+    return false;
+  }
 }
-  
+
 export function isNotEmpty(str) {
-    return str.length !== 0;
+  return str.length !== 0;
 }
-  

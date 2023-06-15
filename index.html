@@ -9,9 +9,35 @@
 </head>
 <body>
     <h1>Database Elements:</h1>
+    <div id="helpDialog" class="dialog" style="display: none;">
+        <h3>Основні функції: </h3>
+        <p>
+            <ul>
+                <li class="listItem">pow(x, 2) - піднести до квадрату</li>
+                <li class="listItem">sin(x) - синус</li>
+                <li class="listItem">cos(x) - косинус</li>
+                <li class="listItem">tan(x) - тангенс</li>
+                <li class="listItem">sqrt(x) - квадратний корінь</li>
+                <li class="listItem">abs(x) - модуль числа</li>
+                <li class="listItem">exp(x) - експонента</li>
+                <li class="listItem">log(x) - натуральний логарифм</li>
+                <li class="listItem">log10(x) - десятковий логарифм</li>
+                <li class="listItem">cbrt(x) - кубічний корінь</li>
+                <li class="listItem">sinh(x) - гиперболический синус </li>
+                <li class="listItem">cosh(x) - гиперболический косинус</li>
+                <li class="listItem">tanh(x) - гиперболический тангенс</li>
+                <li class="listItem">asin(x) - арксинус</li>
+                <li class="listItem">acos(x) - арккосинус</li>
+                <li class="listItem">atan(x) - арктангенс</li>
+                <li class="listItem">random - випадкове число</li>
+            </ul>                
+        </p>
+        <br>
+        <button id = "closeHelpDialog">Close</button>
+    </div>
     <div>
         <input placeholder="Введіть текст функції" id="inputOfElement">
-        <button id="addButton">Додати</button>
+        <button id="addButton">Додати</button><button id="helpButton">Help</button>
         <p id="output"></p>
     </div>
 
@@ -27,8 +53,8 @@
     <button id="infoButton">Інформація про автора</button>
     
     <div id="infoDialog" class="dialog" style="display: block;">
-        <h2>Курсову роботу виконав студент групи КІУКІ-21-5 Ординцев М.О</h2>
-        <p>Це моя перша спроба пера у front-end напрямку, наче не усе так і погано</p>
+        <h2>Курсову роботу виконав студент групи КІУКІ-21-5 Ординцев М.О.</h2>
+        <p>Це - моя перша спроба у front-end напрямку, наче не усе так і погано</p>
         <button id="closeButton">Закрити</button>
     </div>
     
@@ -41,17 +67,32 @@
         const infoDialog = document.getElementById("infoDialog");
         const closeButton = document.getElementById("closeButton");
         infoDialog.classList.add("hidden");
-        
-        infoButton.addEventListener("click", function() {
-            infoDialog.style.display = "block";
+
+        infoButton.addEventListener("click", () => {
             infoDialog.classList.remove("hidden");
             infoDialog.classList.add("visible");
         });
         
-        closeButton.addEventListener("click", function() {
+        closeButton.addEventListener("click", () => {
             infoDialog.classList.remove("visible");
             infoDialog.classList.add("hidden");
         });
+    </script>
+    <script type="module">
+        const helpButton = document.getElementById("helpButton");
+        const closeHelpDialog = document.getElementById("closeHelpDialog");
+        const helpDialog = document.getElementById("helpDialog");
+
+        helpDialog.classList.add("visible");
+
+        helpButton.addEventListener("click", () => {
+            helpDialog.style.display="block";
+        });
+
+        closeHelpDialog.addEventListener("click", () => {
+            helpDialog.style.display="none";
+        });
+
     </script>
 </body>
 </html>

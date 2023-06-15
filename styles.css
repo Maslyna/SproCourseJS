@@ -3,6 +3,7 @@ body {
     background-color: #f5f5f5;
     margin: 0;
     padding: 20px;
+    margin-left: auto;
 }
 
 h1 {
@@ -39,6 +40,11 @@ ul {
 
 li {
     margin-bottom: 10px;
+}
+
+.listItem {
+    color: grey;
+    font-style: oblique;
 }
 
 canvas {

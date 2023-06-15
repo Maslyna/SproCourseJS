@@ -44,8 +44,12 @@ fetch('http://localhost:8080/api/functions')
       drawButton.textContent = 'Draw Graph';
       drawButton.addEventListener('click', () => {
         const value = element.function_text;
-        drawGraphic(replaceMathFunctions(value));
-        graphicDialog.style.display = "block";
+        if (isEvaluable(replaceMathFunctions(value))) {
+          drawGraphic(replaceMathFunctions(value));
+          graphicDialog.style.display = "block";
+        } else {
+          errorText.textContent = "*Введена функція невірна!";
+        }
       });
 
       deleteButton.textContent = 'Delete';
