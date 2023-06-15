@@ -5,21 +5,94 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
-<body >
+<body>
     <h1>Database Elements:</h1>
-    <div><input placeholder="Введіть текст функції" id="inputOfElement"><button id="addButton"></button></div>
-    <div id="output"></div>
-    <br>
+    <div id="helpDialog" class="dialog" style="display: none;">
+        <h3>Основні функції: </h3>
+        <p>
+            <ul>
+                <li class="listItem">pow(x, 2) - піднести до квадрату</li>
+                <li class="listItem">sin(x) - синус</li>
+                <li class="listItem">cos(x) - косинус</li>
+                <li class="listItem">tan(x) - тангенс</li>
+                <li class="listItem">sqrt(x) - квадратний корінь</li>
+                <li class="listItem">abs(x) - модуль числа</li>
+                <li class="listItem">exp(x) - експонента</li>
+                <li class="listItem">log(x) - натуральний логарифм</li>
+                <li class="listItem">log10(x) - десятковий логарифм</li>
+                <li class="listItem">cbrt(x) - кубічний корінь</li>
+                <li class="listItem">sinh(x) - гиперболический синус </li>
+                <li class="listItem">cosh(x) - гиперболический косинус</li>
+                <li class="listItem">tanh(x) - гиперболический тангенс</li>
+                <li class="listItem">asin(x) - арксинус</li>
+                <li class="listItem">acos(x) - арккосинус</li>
+                <li class="listItem">atan(x) - арктангенс</li>
+                <li class="listItem">random - випадкове число</li>
+            </ul>                
+        </p>
+        <br>
+        <button id = "closeHelpDialog">Close</button>
+    </div>
+    <div>
+        <input placeholder="Введіть текст функції" id="inputOfElement">
+        <button id="addButton">Додати</button><button id="helpButton">Help</button>
+        <p id="output"></p>
+    </div>
+
     <ul id="elementList"></ul>
     <br>
-    <script src="script.js"></script>
-    <script src="addElement.js"></script>
+    
+    <button type="module" id="clearButton">Очистити</button>
     <br>
-    <button id="clearButton"></button>
-    <script src="clearButton.js"></script>
+
+    <div id="graphicDialog" class="dialog" style="display: none;">
+        <canvas id="myCanvas" width="1000" height="1000"></canvas></div>
     <br>
-    <canvas id="myCanvas" width="1000" height="1000"></canvas>
+    <button id="infoButton">Інформація про автора</button>
+    
+    <div id="infoDialog" class="dialog" style="display: block;">
+        <h2>Курсову роботу виконав студент групи КІУКІ-21-5 Ординцев М.О.</h2>
+        <p>Це - моя перша спроба у front-end напрямку, наче не усе так і погано</p>
+        <button id="closeButton">Закрити</button>
+    </div>
+    
+    <script type="module" src="functions.js"></script>
+    <script type="module" src="userInterface.js"></script>
+    <script type="module" src="addElement.js"></script>
+    <script type="module" src="clearButton.js"></script>
+    <script type="module">
+        const infoButton = document.getElementById("infoButton");
+        const infoDialog = document.getElementById("infoDialog");
+        const closeButton = document.getElementById("closeButton");
+        infoDialog.classList.add("hidden");
+
+        infoButton.addEventListener("click", () => {
+            infoDialog.classList.remove("hidden");
+            infoDialog.classList.add("visible");
+        });
+        
+        closeButton.addEventListener("click", () => {
+            infoDialog.classList.remove("visible");
+            infoDialog.classList.add("hidden");
+        });
+    </script>
+    <script type="module">
+        const helpButton = document.getElementById("helpButton");
+        const closeHelpDialog = document.getElementById("closeHelpDialog");
+        const helpDialog = document.getElementById("helpDialog");
+
+        helpDialog.classList.add("visible");
+
+        helpButton.addEventListener("click", () => {
+            helpDialog.style.display="block";
+        });
+
+        closeHelpDialog.addEventListener("click", () => {
+            helpDialog.style.display="none";
+        });
+
+    </script>
 </body>
 </html>
